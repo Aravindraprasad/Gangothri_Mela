@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gangothri School - Sci-Fi & Robotics Mela 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d1b4e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .school-image {
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
+            margin-bottom: 40px;
+            animation: float 6s ease-in-out infinite;
+            border: 3px solid rgba(0, 255, 255, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #00ffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+            50% { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff; }
+        }
+
+        .event-details {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .detail-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
+            border-color: rgba(0, 255, 255, 0.8);
+        }
+
+        .detail-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .detail-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .attractions {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .attraction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .attraction-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .attraction-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .attraction-card:hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+        }
+
+        .attraction-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .attraction-title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .attraction-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1a1f3a 0%, #2d1b4e 100%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            color: #0a0e27;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+            animation: pulse-button 2s infinite;
+        }
+
+        @keyframes pulse-button {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.6);
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            font-size: 1.3rem;
+            color: #00ffff;
+        }
+
+        .robot-emoji {
+            display: inline-block;
+            animation: robot-dance 1s infinite;
+        }
+
+        @keyframes robot-dance {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0a0e27;
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2rem; }
+            .subtitle { font-size: 1.3rem; letter-spacing: 2px; }
+            .section-title { font-size: 1.8rem; }
+            .event-details { padding: 20px; }
+            .detail-card { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <section class="hero">
+            <img src="school_front.jpg" alt="Gangothri School" class="school-image" id="schoolImg">
+            <h1 class="title">Gangothri International Public School</h1>
+            <h2 class="subtitle">Sci-Fi & Robotics Mela 2025</h2>
+            <p style="font-size: 1.3rem; max-width: 800px; line-height: 1.8; color: rgba(255,255,255,0.9);">
+                Step into the future at our extraordinary Sci-Fi & Robotics Mela! Experience cutting-edge technology, 
+                witness amazing robotic demonstrations, and immerse yourself in a world of innovation and imagination.
+            </p>
+        </section>
+
+        <section class="event-details">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 30px; color: #00ffff;">EVENT INFORMATION</h2>
+            <div class="detail-card">
+                <div class="detail-item">
+                    <div class="detail-icon">📅</div>
+                    <div class="detail-label">Date</div>
+                    <div class="detail-value">01 December 2025</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">📍</div>
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value">Bangalore</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">🎟️</div>
+                    <div class="detail-label">Entry</div>
+                    <div class="detail-value">FREE</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="attractions">
+            <h2 class="section-title">✨ Featured Attractions ✨</h2>
+            <div class="attraction-grid">
+                <div class="attraction-card">
+                    <div class="attraction-icon">🤖</div>
+                    <h3 class="attraction-title">Robotics Exhibition</h3>
+                    <p class="attraction-desc">Witness incredible robots in action! From humanoid robots to automated machines, experience the future of technology.</p>
+                </div>
+                <div class="attraction-card">
+                    <div class="attraction-icon">🚀</div>
+                    <h3 class="attraction-title">Sci-Fi Displays</h3>
+                    <p class="attraction-desc">Explore futuristic concepts, space technology, and science fiction innovations that will blow your mind.</p>
+                </div>
+                <div class="attraction-card">
+                    <div class="attraction-icon">⚡</div>
+                    <h3 class="attraction-title">Live Demonstrations</h3>
+                    <p class="attraction-desc">Watch live robot demonstrations, coding showcases, and interactive tech experiments throughout the day.</p>
+                </div>
+                <div class="attraction-card">
+                    <div class="attraction-icon">🏆</div>
+                    <h3 class="attraction-title">Competitions</h3>
+                    <p class="attraction-desc">Participate in exciting robotics and science competitions. Show off your skills and win amazing prizes!</p>
+                </div>
+                <div class="attraction-card">
+                    <div class="attraction-icon">🎮</div>
+                    <h3 class="attraction-title">Interactive Zone</h3>
+                    <p class="attraction-desc">Hands-on experience with robots, VR simulations, and interactive displays. Touch, play, and learn!</p>
+                </div>
+                <div class="attraction-card">
+                    <div class="attraction-icon">🔬</div>
+                    <h3 class="attraction-title">Innovation Lab</h3>
+                    <p class="attraction-desc">Discover student projects, DIY robotics, and innovative ideas from young minds shaping tomorrow.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 style="font-size: 2.5rem; margin-bottom: 30px; color: #00ffff;">JOIN US FOR AN UNFORGETTABLE EXPERIENCE!</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+                <span class="robot-emoji">🤖</span> No registration required! Just show up and dive into the world of robots and sci-fi. 
+                Bring your friends, bring your curiosity, and get ready for an amazing day! <span class="robot-emoji">🚀</span>
+            </p>
+            <div class="contact-info">
+                <p style="margin-bottom: 15px; font-size: 1.1rem;">For more information, contact:</p>
+                <p style="font-size: 1.5rem; font-weight: bold;">📞 +91-9341406080  </p>
+            </div>
+        </section>
+
+        <footer>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.7);">© 2025 Gangothri School | Sci-Fi & Robotics Mela</p>
+            <p style="margin-top: 10px; color: #00ffff;">🤖 Innovating Tomorrow, Today 🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create animated stars background
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Load school image from uploaded file
+        const schoolImg = document.getElementById('schoolImg');
+        // Note: In a real implementation, you would replace this with the actual uploaded image
+        // For now, using a placeholder
+        // schoolImg.src = 'data:image/svg+xml,<svg xmlns="school_front.jpg" width="800" height="400"><rect fill="%23ddd" width="800" height="400"/><text x="50%" y="50%" font-size="24" text-anchor="middle" fill="%23999">School Image Will Appear Here</text></svg>';
+    </script>
+</body>
+</html>
